@@ -1,6 +1,6 @@
 [package]
 name = "pathman"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Nicolas Hedger <nicolas@hedger.ch>"]
 edition = "2024"
 license = "MIT OR Apache-2.0"
