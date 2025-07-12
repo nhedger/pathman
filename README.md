@@ -1,8 +1,5 @@
 # Pathman
 
-> [!WARNING]
-> This is a work in progress.
-
 **Pathman** is a _cross-platform_ Rust library for prepending and appending
 directories to the user's `PATH` environment variable.
 
@@ -45,7 +42,7 @@ to the shell configuration file on macOS and Linux.
 ```rust
 use pathman::append_to_path;
 
-append_to_path("/Users/nicolas/.cargo/bin", Some("Cargo installation directory"));
+append_to_path("/Users/nicolas/.biome/bin", Some("Biome installation directory"));
 ```
 
 ## License
