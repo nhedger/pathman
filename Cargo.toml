@@ -1,0 +1,25 @@
+[package]
+name = "pathman"
+version = "0.1.0"
+authors = ["Nicolas Hedger <nicolas@hedger.ch>"]
+edition = "2024"
+license = "MIT OR Apache-2.0"
+description = "A cross-platform library for managing the PATH environment variable."
+homepage = "https://github.com/nhedger/pathman"
+readme = "README.md"
+repository = "https://github.com/nhedger/pathman"
+keywords = ["environment", "path", "cross-platform", "append", "prepend"]
+categories = ["os"]
+
+[dependencies]
+anyhow = "1.0.98"
+home = "0.5.11"
+thiserror = "2.0.12"
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.55.0"
+
+[dev-dependencies]
+assert_fs = "1.1.3"
+predicates = "3.1.3"
+temp-env = "0.3.6"
