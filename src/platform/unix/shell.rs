@@ -82,7 +82,7 @@ impl CurrentShell {
                 format!("export PATH=\"{path}:$PATH\"")
             }
             Shell::Fish => {
-                format!("set -gx PATH {path} $PATH")
+                format!("set -gx PATH \"{path}\" $PATH")
             }
         };
 
@@ -101,7 +101,7 @@ impl CurrentShell {
                 format!("export PATH=\"$PATH:{path}\"")
             }
             Shell::Fish => {
-                format!("set -gx PATH $PATH {path}")
+                format!("set -gx PATH $PATH \"{path}\"")
             }
         };
 

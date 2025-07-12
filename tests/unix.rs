@@ -749,7 +749,7 @@ fn it_prepends_a_path_to_the_path_in_fish_config() {
                 Ok(result) => {
                     assert_eq!(result, UpdateType::Success);
                     assert!(
-                        predicate::str::contains("set -gx PATH /test $PATH")
+                        predicate::str::contains("set -gx PATH \"/test\" $PATH")
                             .from_utf8()
                             .from_file_path()
                             .eval(fish_config.path())
@@ -785,7 +785,7 @@ fn it_appends_a_path_to_the_path_in_fish_config() {
                 Ok(result) => {
                     assert_eq!(result, UpdateType::Success);
                     assert!(
-                        predicate::str::contains("set -gx PATH $PATH /test")
+                        predicate::str::contains("set -gx PATH $PATH \"/test\"")
                             .from_utf8()
                             .from_file_path()
                             .eval(fish_config.path())
@@ -846,7 +846,9 @@ fn it_does_not_prepend_a_path_to_the_path_if_the_set_command_is_already_present_
     // Create .config/fish/config.fish file in the virtual home directory with an existing set command
     let fish_config = home.child(".config/fish/config.fish");
     create_dir_all(fish_config.parent().unwrap()).unwrap();
-    fish_config.write_str("set -gx PATH /test $PATH\n").unwrap();
+    fish_config
+        .write_str("set -gx PATH \"/test\" $PATH\n")
+        .unwrap();
 
     temp_env::with_vars(
         [
@@ -859,7 +861,7 @@ fn it_does_not_prepend_a_path_to_the_path_if_the_set_command_is_already_present_
                 Ok(result) => {
                     assert_eq!(result, UpdateType::AlreadyInPath);
                     assert!(
-                        predicate::str::contains("set -gx PATH /test $PATH")
+                        predicate::str::contains("set -gx PATH \"/test\" $PATH")
                             .from_utf8()
                             .from_file_path()
                             .eval(fish_config.path())
@@ -882,7 +884,9 @@ fn it_does_not_append_a_path_to_the_path_if_the_set_command_is_already_present_i
     // Create .config/fish/config.fish file in the virtual home directory with an existing set command
     let fish_config = home.child(".config/fish/config.fish");
     create_dir_all(fish_config.parent().unwrap()).unwrap();
-    fish_config.write_str("set -gx PATH $PATH /test\n").unwrap();
+    fish_config
+        .write_str("set -gx PATH $PATH \"/test\"\n")
+        .unwrap();
 
     temp_env::with_vars(
         [
@@ -895,7 +899,7 @@ fn it_does_not_append_a_path_to_the_path_if_the_set_command_is_already_present_i
                 Ok(result) => {
                     assert_eq!(result, UpdateType::AlreadyInPath);
                     assert!(
-                        predicate::str::contains("set -gx PATH $PATH /test")
+                        predicate::str::contains("set -gx PATH $PATH \"/test\"")
                             .from_utf8()
                             .from_file_path()
                             .eval(fish_config.path())
@@ -1043,7 +1047,7 @@ fn it_adds_a_comment_before_the_set_command_in_fish_config_when_prepending() {
                 Ok(result) => {
                     assert_eq!(result, UpdateType::Success);
                     assert!(
-                        predicate::str::contains("# Test comment\nset -gx PATH /test $PATH")
+                        predicate::str::contains("# Test comment\nset -gx PATH \"/test\" $PATH")
                             .from_utf8()
                             .from_file_path()
                             .eval(fish_config.path())
@@ -1079,7 +1083,7 @@ fn it_adds_a_comment_before_the_set_command_in_fish_config_when_appending() {
                 Ok(result) => {
                     assert_eq!(result, UpdateType::Success);
                     assert!(
-                        predicate::str::contains("# Test comment\nset -gx PATH $PATH /test")
+                        predicate::str::contains("# Test comment\nset -gx PATH $PATH \"/test\"")
                             .from_utf8()
                             .from_file_path()
                             .eval(fish_config.path())
